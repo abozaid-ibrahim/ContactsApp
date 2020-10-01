@@ -17,7 +17,7 @@ final class ContactListController: UITableViewController {
     private let viewModel: ContactListViewModelType
     private var contactsList: [Contact] { return viewModel.dataList }
 
-    init(viewModel: ContactListViewModelType) {
+    init(with viewModel: ContactListViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
