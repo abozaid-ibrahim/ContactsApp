@@ -7,12 +7,7 @@
 //
 
 import UIKit
-protocol ContactListViewModelType {
-    var dataList: [Contact] { get }
-}
 
-typealias ViewModel = String
-typealias Contact = Void
 final class ContactListController: UITableViewController {
     private let viewModel: ContactListViewModelType
     private var contactsList: [Contact] { return viewModel.dataList }
@@ -32,6 +27,26 @@ final class ContactListController: UITableViewController {
         title = "Contacts"
         tableView.register(ContactTableCell.self)
         tableView.rowHeight = 90
+        viewModel.loadContacts()
+        bindToViewModel()
+    }
+
+    func bindToViewModel() {
+        viewModel.reloadData.subscribe { [weak self] reload in
+            DispatchQueue.main.async { if reload { self?.tableView.reloadData() } }
+        }
+        viewModel.isLoading.subscribe { [weak self] isLoading in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                let size: CGSize = isLoading ? self.tableView.bounds.size : .zero
+//                self.tableView.updateFooter(size: size)
+            }
+        }
+        viewModel.error.subscribe { [weak self] error in
+            guard let self = self, let msg = error else { return }
+            DispatchQueue.main.async { self.show(error: msg) }
+        }
+       
     }
 
     // MARK: - Table view data source
@@ -42,7 +57,7 @@ final class ContactListController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ContactTableCell.identifier, for: indexPath) as! ContactTableCell
-
+        cell.setData(for: contactsList[indexPath.row])
         return cell
     }
 }

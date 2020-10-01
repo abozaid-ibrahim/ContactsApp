@@ -9,12 +9,11 @@
 import UIKit
 
 final class ContactTableCell: UITableViewCell {
-
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var phoneNumberLabel: UILabel!
-    
-    func setData(for contact:Contact){
-        
+
+    func setData(for contact: Contact) {
+        nameLabel.text = contact.name
+        phoneNumberLabel.text = contact.phoneNumber
     }
-    
 }

@@ -8,5 +8,5 @@
 
 import Foundation
 struct APIConstants {
-    static let baseURL = "https://www.notion.so/"
+    static let baseURL = "https://5f6b173201d6570016d0410a.mockapi.io/api/"
 }

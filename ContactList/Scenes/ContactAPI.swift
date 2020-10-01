@@ -21,7 +21,7 @@ extension ContactAPI: RequestBuilder {
     var path: String {
         switch self {
         case .contactsList:
-            return "Contact-list-iOS-bcecc6582f774ba9b679a64a06c27802"
+            return "contacts"
         }
     }
 
@@ -46,6 +46,7 @@ extension ContactAPI: RequestBuilder {
         urlComponents?.queryItems = items
         var request = URLRequest(url: urlComponents!.url!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringCacheData, timeoutInterval: 30)
         request.httpMethod = method.rawValue
+        print(endpoint)
         return request
     }
 }
