@@ -26,9 +26,13 @@ final class ContactListController: UITableViewController {
         super.viewDidLoad()
         title = "Contacts"
         tableView.register(ContactTableCell.self)
-        tableView.rowHeight = 90
+        tableView.tableFooterView = ActivityIndicatorFooterView()
         viewModel.loadContacts()
         bindToViewModel()
+    }
+
+    private var indicator: ActivityIndicatorFooterView? {
+        return tableView.tableFooterView as? ActivityIndicatorFooterView
     }
 
     func bindToViewModel() {
@@ -38,19 +42,20 @@ final class ContactListController: UITableViewController {
         viewModel.isLoading.subscribe { [weak self] isLoading in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                let size: CGSize = isLoading ? self.tableView.bounds.size : .zero
-//                self.tableView.updateFooter(size: size)
+                self.tableView.sectionFooterHeight = isLoading ? 80 : 0
+                self.indicator?.set(isLoading: isLoading)
             }
         }
         viewModel.error.subscribe { [weak self] error in
             guard let self = self, let msg = error else { return }
             DispatchQueue.main.async { self.show(error: msg) }
         }
-       
     }
+}
 
-    // MARK: - Table view data source
+// MARK: - Table view data source
 
+extension ContactListController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contactsList.count
     }
@@ -59,5 +64,9 @@ final class ContactListController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ContactTableCell.identifier, for: indexPath) as! ContactTableCell
         cell.setData(for: contactsList[indexPath.row])
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        AppNavigator.shared.push(.contactDetails(of: contactsList[indexPath.row]))
     }
 }

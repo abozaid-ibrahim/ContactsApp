@@ -10,8 +10,15 @@ import Foundation
 import UIKit
 enum Destination {
     case contactsList
+    case contactDetails(of: Contact)
     var controller: UIViewController {
-        return ContactListController(with: ContactListViewModel())
+        switch self {
+        case .contactsList:
+            return ContactListController(with: ContactListViewModel())
+        case let .contactDetails(contact):
+            let contactVC = ContactDetailsController()
+            contactVC.contact = contact
+            return contactVC
+        }
     }
 }
-
