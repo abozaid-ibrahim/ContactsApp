@@ -9,4 +9,16 @@
 import Foundation
 final class ContactListViewModel: ContactListViewModelType {
     var dataList: [Contact] = [(), (), ()]
+    let apiClient: ApiClient
+
+    init(apiClient: ApiClient = HTTPClient()) {
+        self.apiClient = apiClient
+    }
+
+    func loadData(){
+        apiClient.getData(of: ContactAPI.contactsList) { [weak self] result in
+            
+        }
+
+    }
 }
