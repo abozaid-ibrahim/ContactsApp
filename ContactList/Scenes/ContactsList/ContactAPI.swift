@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 enum ContactAPI {
     case contactsList
 }
@@ -46,7 +45,6 @@ extension ContactAPI: RequestBuilder {
         urlComponents?.queryItems = items
         var request = URLRequest(url: urlComponents!.url!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringCacheData, timeoutInterval: 30)
         request.httpMethod = method.rawValue
-        print(endpoint)
         return request
     }
 }

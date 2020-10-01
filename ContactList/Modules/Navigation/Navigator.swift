@@ -18,10 +18,8 @@ final class AppNavigator {
     func set(window: UIWindow) {
         if UIDevice.current.userInterfaceIdiom == .pad {
             let splitViewController = UISplitViewController()
-            let contactsController = Destination.contactsList.controller
-            let detailsController = Destination.contactDetails(of: nil).controller
-            let masterNavigationController = UINavigationController(rootViewController: contactsController)
-            let detailsNavigationController = UINavigationController(rootViewController: detailsController)
+            let masterNavigationController = UINavigationController(rootViewController: Destination.contactsList.controller)
+            let detailsNavigationController = UINavigationController(rootViewController: Destination.contactDetails(of: nil).controller)
             splitViewController.viewControllers = [masterNavigationController, detailsNavigationController]
             splitViewController.preferredDisplayMode = .allVisible
             AppNavigator.homeNavigationController = masterNavigationController

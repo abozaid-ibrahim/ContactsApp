@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 struct Contact: Codable {
     let id: String
     let name: String
@@ -18,4 +19,3 @@ struct Contact: Codable {
     let avatar: String?
 }
 
-typealias ContactResponse = [Contact]

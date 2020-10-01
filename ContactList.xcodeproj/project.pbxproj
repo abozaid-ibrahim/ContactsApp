@@ -573,7 +573,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"ContactList/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 475YN7ANSF;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ContactList/SupportingFiles/Info.plist;
@@ -594,7 +594,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"ContactList/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 475YN7ANSF;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ContactList/SupportingFiles/Info.plist;
