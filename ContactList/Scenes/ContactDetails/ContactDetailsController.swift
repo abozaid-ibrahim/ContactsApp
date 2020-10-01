@@ -40,7 +40,7 @@ final class ContactDetailsController: UIViewController {
 
     private func setTranslucentNaivigationBar() {
         guard splitViewController != nil else { return }
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default) // UIImage.init(named: "transparent.png")
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.view.backgroundColor = .clear

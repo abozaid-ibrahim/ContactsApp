@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+
 enum Destination {
     case contactsList
     case contactDetails(of: Contact?)

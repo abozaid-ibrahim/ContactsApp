@@ -12,7 +12,6 @@
 		6C5259B72525EB3E0043E2F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5259B62525EB3E0043E2F6 /* AppDelegate.swift */; };
 		6C5259B92525EB3E0043E2F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5259B82525EB3E0043E2F6 /* SceneDelegate.swift */; };
 		6C5259BD2525EB400043E2F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C5259BC2525EB400043E2F6 /* Assets.xcassets */; };
-		6C5259C02525EB400043E2F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C5259BF2525EB400043E2F6 /* Preview Assets.xcassets */; };
 		6C5259C32525EB400043E2F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C5259C12525EB400043E2F6 /* LaunchScreen.storyboard */; };
 		6C5259CE2525EB400043E2F6 /* ContactListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5259CD2525EB400043E2F6 /* ContactListTests.swift */; };
 		6C5259D92525EB400043E2F6 /* ContactListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5259D82525EB400043E2F6 /* ContactListUITests.swift */; };
@@ -62,7 +61,6 @@
 		6C5259B62525EB3E0043E2F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C5259B82525EB3E0043E2F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6C5259BC2525EB400043E2F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6C5259BF2525EB400043E2F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6C5259C22525EB400043E2F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C5259C42525EB400043E2F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C5259C92525EB400043E2F6 /* ContactListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContactListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,17 +144,8 @@
 				6C5259F42525EEE90043E2F6 /* SupportingFiles */,
 				6C5259E92525ECF00043E2F6 /* Modules */,
 				6C5259E62525EB630043E2F6 /* Scenes */,
-				6C5259BE2525EB400043E2F6 /* Preview Content */,
 			);
 			path = ContactList;
-			sourceTree = "<group>";
-		};
-		6C5259BE2525EB400043E2F6 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				6C5259BF2525EB400043E2F6 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		6C5259CC2525EB400043E2F6 /* ContactListTests */ = {
@@ -371,7 +360,6 @@
 			files = (
 				6C5259C32525EB400043E2F6 /* LaunchScreen.storyboard in Resources */,
 				6C5259EF2525ED600043E2F6 /* ContactTableCell.xib in Resources */,
-				6C5259C02525EB400043E2F6 /* Preview Assets.xcassets in Resources */,
 				6C5259BD2525EB400043E2F6 /* Assets.xcassets in Resources */,
 				6C525A172525FB850043E2F6 /* ContactDetailsController.xib in Resources */,
 			);
