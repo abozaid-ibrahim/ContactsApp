@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 enum Destination {
     case contactsList
-    case contactDetails(of: Contact)
+    case contactDetails(of: Contact?)
     var controller: UIViewController {
         switch self {
         case .contactsList:

@@ -14,16 +14,21 @@ final class ContactDetailsController: UIViewController {
     @IBOutlet private var phoneNumberLabel: UILabel!
     @IBOutlet private var emailLabel: UILabel!
     @IBOutlet private var jobLabel: UILabel!
-    
+
     private var imageLoader: Disposable?
-    var contact: Contact?
+    var contact: Contact? {
+        didSet {
+            if self.isViewLoaded {
+                updateUIWithData()
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUIWithData()
     }
 
-   
     private func updateUIWithData() {
         imageLoader = avatarView.setImage(with: contact?.avatar ?? "")
         nameLabel.text = contact?.name

@@ -11,6 +11,7 @@ import UIKit
 final class ContactListController: UITableViewController {
     private let viewModel: ContactListViewModelType
     private var contactsList: [Contact] { return viewModel.dataList }
+    private var detailsController: ContactDetailsController?
 
     init(with viewModel: ContactListViewModelType) {
         self.viewModel = viewModel
@@ -24,14 +25,56 @@ final class ContactListController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+        bindToViewModel()
+        viewModel.loadContacts()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
+        super.viewWillAppear(animated)
+    }
+}
+
+// MARK: - Table view data source
+
+extension ContactListController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contactsList.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ContactTableCell.identifier, for: indexPath) as! ContactTableCell
+        cell.setData(for: contactsList[indexPath.row])
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let controller = detailsController else {
+            AppNavigator.shared.push(.contactDetails(of: contactsList[indexPath.row]))
+            return
+        }
+        controller.contact = contactsList[indexPath.row]
+        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        controller.navigationItem.leftItemsSupplementBackButton = true
+        self.splitViewController?.showDetailViewController(controller.navigationController!, sender: nil)
+
+    }
+}
+
+// MARK: - Private setup
+
+private extension ContactListController {
+    func setup() {
         title = "Contacts"
         tableView.register(ContactTableCell.self)
         tableView.tableFooterView = ActivityIndicatorFooterView()
-        viewModel.loadContacts()
-        bindToViewModel()
+        if let split = splitViewController {
+            detailsController = (split.viewControllers.last as! UINavigationController).topViewController as? ContactDetailsController
+        }
     }
 
-    private var indicator: ActivityIndicatorFooterView? {
+    var indicator: ActivityIndicatorFooterView? {
         return tableView.tableFooterView as? ActivityIndicatorFooterView
     }
 
@@ -50,23 +93,5 @@ final class ContactListController: UITableViewController {
             guard let self = self, let msg = error else { return }
             DispatchQueue.main.async { self.show(error: msg) }
         }
-    }
-}
-
-// MARK: - Table view data source
-
-extension ContactListController {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contactsList.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ContactTableCell.identifier, for: indexPath) as! ContactTableCell
-        cell.setData(for: contactsList[indexPath.row])
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        AppNavigator.shared.push(.contactDetails(of: contactsList[indexPath.row]))
     }
 }
