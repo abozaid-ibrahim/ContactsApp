@@ -55,10 +55,6 @@ extension ContactListController {
             return
         }
         controller.contact = contactsList[indexPath.row]
-        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-        controller.navigationItem.leftItemsSupplementBackButton = true
-        self.splitViewController?.showDetailViewController(controller.navigationController!, sender: nil)
-
     }
 }
 
@@ -69,8 +65,10 @@ private extension ContactListController {
         title = "Contacts"
         tableView.register(ContactTableCell.self)
         tableView.tableFooterView = ActivityIndicatorFooterView()
-        if let split = splitViewController {
-            detailsController = (split.viewControllers.last as! UINavigationController).topViewController as? ContactDetailsController
+        if let split = splitViewController,
+            let navigationController = split.viewControllers.last as? UINavigationController,
+            let topController = navigationController.topViewController {
+            detailsController = topController as? ContactDetailsController
         }
     }
 
@@ -80,7 +78,15 @@ private extension ContactListController {
 
     func bindToViewModel() {
         viewModel.reloadData.subscribe { [weak self] reload in
-            DispatchQueue.main.async { if reload { self?.tableView.reloadData() } }
+            guard let self = self else { return }
+            DispatchQueue.main.async { if reload {
+                self.tableView.reloadData()
+                guard !self.contactsList.isEmpty, self.splitViewController != nil else {
+                    return
+                }
+                self.tableView.selectRow(at: .zero, animated: true, scrollPosition: .top)
+                self.tableView(self.tableView, didSelectRowAt: .zero)
+            } }
         }
         viewModel.isLoading.subscribe { [weak self] isLoading in
             guard let self = self else { return }
@@ -93,5 +99,11 @@ private extension ContactListController {
             guard let self = self, let msg = error else { return }
             DispatchQueue.main.async { self.show(error: msg) }
         }
+    }
+}
+
+extension IndexPath {
+    static var zero: IndexPath {
+        return IndexPath(row: 0, section: 0)
     }
 }

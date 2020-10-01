@@ -27,6 +27,7 @@ final class ContactDetailsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUIWithData()
+        setTranslucentNaivigationBar()
     }
 
     private func updateUIWithData() {
@@ -35,6 +36,14 @@ final class ContactDetailsController: UIViewController {
         phoneNumberLabel.text = contact?.phoneNumber
         emailLabel.text = contact?.email
         jobLabel.text = contact?.jobTitle
+    }
+
+    private func setTranslucentNaivigationBar() {
+        guard splitViewController != nil else { return }
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default) // UIImage.init(named: "transparent.png")
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
     }
 
     deinit {
